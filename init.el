@@ -4,16 +4,12 @@
 (package-initialize)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; self writen definitions
+;; self added definitions of standard funtions
 (menu-bar-showhide-tool-bar-menu-customize-disable)
 (menu-bar-no-scroll-bar)
-(global-linum-mode)
-;; semantic package add new system includes
-;(semantic-add-system-include "~/dev/linux-cortexm-1.12.0/linux-copy/include")
-;(semantic-add-system-include "~/dev/linux-cortexm-1.12.0/linux-copy/kernel")
+(global-linum-mode) 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; end of self added configs
-
 
 (setq inhibit-startup-message t)
 
@@ -40,7 +36,8 @@ sml-mode
 projectile
 volatile-highlights
 undo-tree
-zygospore))
+zygospore
+monokai-theme))
 
 (defun install-packages ()
 "Install all required packages."
