@@ -7,8 +7,8 @@
 ;; self added definitions of standard funtions
 (menu-bar-showhide-tool-bar-menu-customize-disable)
 (menu-bar-no-scroll-bar)
-(global-linum-mode) 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-linum-mode)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; end of self added configs
 
 (setq inhibit-startup-message t)
@@ -71,6 +71,8 @@ monokai-theme))
 (define-key c++-mode-map [(tab)] 'moo-complete)
 (define-key c-mode-map (kbd "M-o") 'fa-show)
 (define-key c++-mode-map (kbd "M-o") 'fa-show)
+(define-key c-mode-map (kbd "M-j") 'fa-jump)
+(define-key c++-mode-map (kbd "M-j") 'fa-jump)
 ;; company
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
@@ -111,7 +113,7 @@ c-default-style "linux" ;; set style to "linux"
 (setq-default indent-tabs-mode nil)
 
 ;; set appearance of a tab that is represented by 4 spaces
-(setq-default tab-width 4)
+(setq-default tab-width 2)
 
 ;; Compilation
 (global-set-key (kbd "<f5>") (lambda ()
