@@ -31,6 +31,7 @@ ws-butler
 iedit
 yasnippet
 gist
+sr-speedbar
 smartparens
 sml-mode
 projectile
@@ -113,7 +114,7 @@ c-default-style "linux" ;; set style to "linux"
 (setq-default indent-tabs-mode nil)
 
 ;; set appearance of a tab that is represented by 4 spaces
-(setq-default tab-width 2)
+(setq-default tab-width 4)
 
 ;; Compilation
 (global-set-key (kbd "<f5>") (lambda ()
@@ -162,6 +163,10 @@ gdb-show-main t
 (projectile-global-mode)
 (setq projectile-enable-caching t)
 
+;; Sr-speedbar: show directory of current buffer
+(require 'sr-speedbar)
+(setq speedbar-show-unknown-files t )
+
 ;; Package zygospore
 (global-set-key (kbd "C-x 1") 'zygospore-toggle-delete-other-windows)
 (custom-set-variables
@@ -171,7 +176,7 @@ gdb-show-main t
 ;; If there is more than one, they won't work right.
 '(custom-enabled-themes (quote (monokai)))
 '(custom-safe-themes (quote ("57f8801351e8b7677923c9fe547f7e19f38c99b80d68c34da6fa9b94dc6d3297" default)))
-'(semantic-c-dependency-system-include-path (quote ("/home/romanjoe/dev/linux-cortexm-1.12.0/linux/drivers" "/home/romanjoe/dev/linux-cortexm-1.12.0/linux/arch" "/home/romanjoe/dev/linux-cortexm-1.12.0/linux/include" "/home/romanjoe/dev/linux-cortexm-1.12.0/linux/kernel" "/usr/include")))
+'(semantic-c-dependency-system-include-path (quote ("/home/romanjoe/dev/linux-cortexm-1.12.0/linux/drivers" "/home/romanjoe/dev/linux-cortexm-1.12.0/linux/arch" "/home/romanjoe/dev/linux-cortexm-1.12.0/linux/include" "/home/romanjoe/dev/linux-cortexm-1.12.0/linux/kernel" "/home/romanjoe/dev/stm32/stm32_discovery_arm_gcc/STM32F4-Discovery_FW_V1.1.0/Libraries/CMSIS/ST/STM32F4xx/Include" "/home/romanjoe/dev/stm32/stm32_discovery_arm_gcc/STM32F4-Discovery_FW_V1.1.0/Libraries/CMSIS/Include" "/home/romanjoe/dev/stm32/stm32_discovery_arm_gcc/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc")))
 '(tool-bar-mode nil))
 (custom-set-faces
 ;; custom-set-faces was added by Custom.
