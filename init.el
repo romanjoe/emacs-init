@@ -2,11 +2,13 @@
 (add-to-list 'package-archives
 '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
+
 ;; ================= MY MODIFICATIONS ===============================
+;; ****** SPECIFIC FOR WINDOWS  *******************
 ;; Use 10-pt Consolas as default font
-(set-face-attribute 'default nil
-                    :family "Consolas" :height 120)
-;; ---- SPECIFIC FOR WINDOWS [END] ------
+;;(set-face-attribute 'default nil
+;;                    :family "Consolas" :height 120)
+;; ************************************************
 
 ;; store all backup and autosave files in the one dir
 (setq backup-directory-alist `(("." . "~/.tilda")))
@@ -22,7 +24,7 @@
 (menu-bar-no-scroll-bar)
 (global-linum-mode)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; end of self added configs
+;; =============== MY MODIFICATIONS END ===============================
 
 (setq inhibit-startup-message t)
 
