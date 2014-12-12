@@ -2,6 +2,19 @@
 (add-to-list 'package-archives
 '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
+;; ================= MY MODIFICATIONS ===============================
+;; Use 10-pt Consolas as default font
+(set-face-attribute 'default nil
+                    :family "Consolas" :height 120)
+;; ---- SPECIFIC FOR WINDOWS [END] ------
+
+;; store all backup and autosave files in the one dir
+(setq backup-directory-alist `(("." . "~/.tilda")))
+(setq backup-by-copying t)
+(setq delete-old-versions t
+      kept-new-versions 6
+      kept-old-versions 2
+      version-control t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; self added definitions of standard funtions
@@ -18,6 +31,7 @@
 (defconst demo-packages
 '(anzu
 company
+company-c-headers
 duplicate-thing
 ggtags
 helm
@@ -170,17 +184,22 @@ gdb-show-main t
 ;; Package zygospore
 (global-set-key (kbd "C-x 1") 'zygospore-toggle-delete-other-windows)
 (custom-set-variables
-;; custom-set-variables was added by Custom.
-;; If you edit it by hand, you could mess it up, so be careful.
-;; Your init file should contain only one such instance.
-;; If there is more than one, they won't work right.
-'(custom-enabled-themes (quote (monokai)))
-'(custom-safe-themes (quote ("57f8801351e8b7677923c9fe547f7e19f38c99b80d68c34da6fa9b94dc6d3297" default)))
-'(semantic-c-dependency-system-include-path (quote ("/home/romanjoe/dev/linux-cortexm-1.12.0/linux/drivers" "/home/romanjoe/dev/linux-cortexm-1.12.0/linux/arch" "/home/romanjoe/dev/linux-cortexm-1.12.0/linux/include" "/home/romanjoe/dev/linux-cortexm-1.12.0/linux/kernel" "/home/romanjoe/dev/stm32/stm32_discovery_arm_gcc/STM32F4-Discovery_FW_V1.1.0/Libraries/CMSIS/ST/STM32F4xx/Include" "/home/romanjoe/dev/stm32/stm32_discovery_arm_gcc/STM32F4-Discovery_FW_V1.1.0/Libraries/CMSIS/Include" "/home/romanjoe/dev/stm32/stm32_discovery_arm_gcc/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc")))
-'(tool-bar-mode nil))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (monokai)))
+ '(custom-safe-themes
+   (quote
+    ("64581032564feda2b5f2cf389018b4b9906d98293d84d84142d90d7986032d33" "57f8801351e8b7677923c9fe547f7e19f38c99b80d68c34da6fa9b94dc6d3297" default)))
+ '(scroll-bar-mode nil)
+ '(semantic-c-dependency-system-include-path
+   (quote
+    ("/home/romanjoe/dev/linux-cortexm-1.12.0/linux/drivers" "/home/romanjoe/dev/linux-cortexm-1.12.0/linux/arch" "/home/romanjoe/dev/linux-cortexm-1.12.0/linux/include" "/home/romanjoe/dev/linux-cortexm-1.12.0/linux/kernel" "/home/romanjoe/dev/stm32/stm32_discovery_arm_gcc/STM32F4-Discovery_FW_V1.1.0/Libraries/CMSIS/ST/STM32F4xx/Include" "/home/romanjoe/dev/stm32/stm32_discovery_arm_gcc/STM32F4-Discovery_FW_V1.1.0/Libraries/CMSIS/Include" "/home/romanjoe/dev/stm32/stm32_discovery_arm_gcc/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc")))
+ '(tool-bar-mode nil))
 (custom-set-faces
-;; custom-set-faces was added by Custom.
-;; If you edit it by hand, you could mess it up, so be careful.
-;; Your init file should contain only one such instance.
-;; If there is more than one, they won't work right.
-)
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
