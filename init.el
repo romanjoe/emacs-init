@@ -22,7 +22,16 @@
 ;; self added definitions of standard funtions
 (menu-bar-showhide-tool-bar-menu-customize-disable)
 (menu-bar-no-scroll-bar)
+(menu-bar-mode -99)
 (global-linum-mode)
+
+;; set custom themes folder and font
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(set-face-attribute 'default nil
+                    :family "Ubuntu Mono"
+                    :height 130
+                    :weight 'normal
+                    :width 'normal)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; =============== MY MODIFICATIONS END ===============================
 
@@ -193,7 +202,7 @@ gdb-show-main t
  '(custom-enabled-themes (quote (monokai)))
  '(custom-safe-themes
    (quote
-    ("64581032564feda2b5f2cf389018b4b9906d98293d84d84142d90d7986032d33" "57f8801351e8b7677923c9fe547f7e19f38c99b80d68c34da6fa9b94dc6d3297" default)))
+    ("0eebf69ceadbbcdd747713f2f3f839fe0d4a45bd0d4d9f46145e40878fc9b098" default)))
  '(scroll-bar-mode nil)
  '(semantic-c-dependency-system-include-path
    (quote
