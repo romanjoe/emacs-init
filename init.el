@@ -33,8 +33,6 @@
 (global-linum-mode)
 ;; start emacs server feature
 (server-start)
-;; enable start elscreen package on start
-(elscreen-start)
 ;; set default intendation size
 (setq-default tab-width 4)
 (setq-default c-basic-offset 4)
@@ -135,6 +133,9 @@
 (setq helm-gtags-prefix-key "\C-cg")
 
 (add-to-list 'load-path "~/.emacs.d/custom")
+
+;; enable start elscreen package on start
+(elscreen-start)
 
 (require 'setup-helm)
 (require 'setup-helm-gtags)
