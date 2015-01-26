@@ -43,12 +43,6 @@
 (require 'volatile-highlights)
 (volatile-highlights-mode t)
 
-;; Package: clean-aindent-mode
-;; GROUP: Editing -> Indent -> Clean Aindent
-(require 'clean-aindent-mode)
-(add-hook 'prog-mode-hook 'clean-aindent-mode)
-
-
 ;; PACKAGE: dtrt-indent
 (require 'dtrt-indent)
 (dtrt-indent-mode 1)

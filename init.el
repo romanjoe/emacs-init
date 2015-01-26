@@ -14,6 +14,8 @@
 (setq user-full-name "romanjoe")
 (setq user-mail-address "mrromanjoe@gmail.com")
 
+;; omit startup message
+(setq inhibit-startup-message t)
 ;; store all backup and autosave files in the one dir
 (setq backup-directory-alist `(("." . "~/.tilda")))
 (setq backup-by-copying t)
@@ -45,7 +47,6 @@
 (setq scroll-margin 10)
 ;; short messages
 (defalias 'yes-or-no-p 'y-or-n-p)
-
 ;; delete trailing whitespace, format buffer and untabify, when save buffer
 (defun format-current-buffer()
   (indent-region (point-min) (point-max)))
@@ -65,19 +66,16 @@
                     :height 130
                     :weight 'normal
                     :width 'normal)
-;; function for files with sudo rights
-                                        ;(defun sudo-save ()
-                                        ;(interactive)
-                                        ;(if (not buffer-file-name)
-                                        ;   (write-file (concat "/sudo:root@localhost:" (ido-read-file-name "File:")))
-                                        ;  (write-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
+
+;; function for files with sudo rights
+(defun sudo-save ()
+  (interactive)
+  (if (not buffer-file-name)
+      (write-file (concat "/sudo:root@localhost:" (ido-read-file-name "File:")))
+    (write-file (concat "/sudo:root@localhost:" buffer-file-name))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; =============== MY MODIFICATIONS END ===============================
-
-(setq inhibit-startup-message t)
-
-(defalias 'yes-or-no-p 'y-or-n-p)
 
 (defconst demo-packages
   '(anzu
@@ -89,7 +87,6 @@
     helm-gtags
     helm-swoop
     function-args
-    clean-aindent-mode
     comment-dwim-2
     dtrt-indent
     ws-butler
@@ -221,10 +218,6 @@
  gdb-show-main t
  )
 
-;; Package: clean-aindent-mode
-(require 'clean-aindent-mode)
-(add-hook 'prog-mode-hook 'clean-aindent-mode)
-
 ;; Package: dtrt-indent
 (require 'dtrt-indent)
 (dtrt-indent-mode 1)
@@ -323,7 +316,8 @@ May be necessary for some GUI environments (e.g., Mac OS X)")
 
 ;; Package specific initialization
 (add-hook
- 'after-init-hook
+ 'python-mode
+ ;; 'after-init-hook
  '(lambda ()
 
     ;; Looks like you need Emacs 24 for projectile
