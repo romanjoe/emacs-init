@@ -52,8 +52,8 @@
   (if (not indent-tabs-mode)
       (untabify (point-min) (point-max)))
   nil
-  )
-(add-to-list 'write-file-functions 'format-current-buffer)
+)
+;;(add-to-list 'write-file-functions 'format-current-buffer)
 (add-to-list 'write-file-functions 'untabify-current-buffer)
 (add-to-list 'write-file-functions 'delete-trailing-whitespace)
 
@@ -64,7 +64,6 @@
                     :height 130
                     :weight 'normal
                     :width 'normal)
-
 
 ;; function for files with sudo rights
 (defun sudo-save ()
@@ -81,34 +80,54 @@
     company-c-headers
     duplicate-thing
     ggtags
+    ;; Helm is incremental completion and selection
+    ;; narrowing framework for Emacs
     helm
+    ;; GNU GLOBAL helm interface
     helm-gtags
+    ;; list match lines to another buffer, which is able
+    ;; to squeeze by any words you input.
     helm-swoop
+    ;; package for showing an inline arguments hint for
+    ;; the C/C++ function at point
     function-args
+    ;; easy commenting everything by M-;
     comment-dwim-2
+    ;; for guessing indentation for current file
     dtrt-indent
+    ;; an unobtrusive way to trim spaces from end of line
     ws-butler
     iedit
+    ;; powerful snippet package for wide range of languages
     yasnippet
+    ;; quick interface to own  gists
     gist
+    ;; creates files tree in separate buffer
     sr-speedbar
+    ;; intelligent parenthesis auto insertion
     smartparens
-    sml-mode
+    ;; package helps to operate with projects in many languages
+    ;; in smart way
     projectile
+    ;; rings visual feedback to some operations by
+    ;; highlighting portions relating to the operations
     volatile-highlights
+    ;; displays undo history in a graph
     undo-tree
-    zygospore
-    ;; user themes
+    ;; adding tabs to emacs
     elscreen
-    ;; python
-    projectile
+    ;; smart auto-completition package
     auto-complete
+    ;; epc server, works like backend for jedi python
+    ;; completition library
     epc
+    ;; emacs package for interface with jedi python lib
     jedi
+    ;; package for quick operations with python virtualenv
     virtualenvwrapper
-    ;; json parser
+    ;; json syntax highlighter
     json
-    ;; apply python pep8
+    ;; applies python pep8 coding style to python sources
     py-autopep8
     ;; package for auto spell checking
     auto-dictionary
@@ -250,6 +269,8 @@
 ;; Sr-speedbar: show directory of current buffer
 (require 'sr-speedbar)
 (setq speedbar-show-unknown-files t )
+;; disable icons in speedbar
+(setq speedbar-use-images nil)
 
 ;; Package zygospore
 (global-set-key (kbd "C-x 1") 'zygospore-toggle-delete-other-windows)
@@ -284,6 +305,9 @@
 (setq python-shell-interpreter py-version)
 ;; accociate files with python
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+;; apply pep8 to buffer before save
+(require 'py-autopep8)
+(add-hook 'before-save-hook 'py-autopep8-before-save)
 
 ;; Global Jedi config vars
 
@@ -428,7 +452,8 @@ May be necessary for some GUI environments (e.g., Mac OS X)")
     ;; Now hook everything up
     ;; Hook up to autocomplete
     (add-to-list 'ac-sources 'ac-source-jedi-direct)
-
+    ;; this solves a problem, when auto-complete tries to nubber lines in linum-mode
+    (ac-linum-workaround)
     ;; Enable Jedi setup on mode start
     (add-hook 'python-mode-hook 'jedi:setup)
 
@@ -438,7 +463,6 @@ May be necessary for some GUI environments (e.g., Mac OS X)")
     (when jedi-config:use-system-python
       (add-hook 'python-mode-hook
                 'jedi-config:set-python-executable))
-
     ;; And custom keybindings
     (defun jedi-config:setup-keys ()
       (local-set-key (kbd "M-.") 'jedi:goto-definition)
