@@ -5,9 +5,32 @@
 
 ;; ================= MY MODIFICATIONS ===============================
 ;; ****** SPECIFIC FOR WINDOWS  *******************
-;; Use 10-pt Consolas as default font
+;;Use 10-pt Consolas as default font
+(cond
+ ((string-equal system-type "windows-nt")
+ (progn
+   (set-face-attribute 'default nil
+                       :family "Consolas" :height 120) )
+ )
+ ((string-equal system-type "gnu/linux")
+  (progn
+    (set-face-attribute 'default nil
+                        :family "Ubuntu Mono"
+                        :height 130
+                        :weight 'normal
+                        :width 'normal) )
+  )
+)
+
 ;;(set-face-attribute 'default nil
 ;;                    :family "Consolas" :height 120)
+
+;;(set-face-attribute 'default nil
+;;                   :family "Ubuntu Mono"
+;;                    :height 130
+;;                    :weight 'normal
+;;                    :width 'normal)
+
 ;; ************************************************
 
 ;; who am i
@@ -59,11 +82,11 @@
 
 ;; set custom themes folder and font
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(set-face-attribute 'default nil
-                    :family "Ubuntu Mono"
-                    :height 130
-                    :weight 'normal
-                    :width 'normal)
+;;(set-face-attribute 'default nil
+;;                   :family "Ubuntu Mono"
+;;                    :height 130
+;;                    :weight 'normal
+;;                    :width 'normal)
 
 ;; function for files with sudo rights
 (defun sudo-save ()
