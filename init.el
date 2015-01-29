@@ -3,16 +3,29 @@
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
+<<<<<<< .merge_file_a14040
 ;; ================ MY MODIFICATIONS ======================
 ;; **************** PLATFORM DEPENDENT  *******************
 (cond
  ((string-equal system-type "windows-nt")
   (progn ;;Use 10-pt Consolas as default font in win system
+=======
+;; ================= MY MODIFICATIONS ===============================
+;; ****** SPECIFIC FOR WINDOWS  *******************
+;;Use 10-pt Consolas as default font
+(cond
+ ((string-equal system-type "windows-nt")
+ (progn
+>>>>>>> .merge_file_a19756
    (set-face-attribute 'default nil
                        :family "Consolas" :height 120) )
  )
  ((string-equal system-type "gnu/linux")
+<<<<<<< .merge_file_a14040
   (progn ;; Use Ubuntu Mono font in gnu/linux system
+=======
+  (progn
+>>>>>>> .merge_file_a19756
     (set-face-attribute 'default nil
                         :family "Ubuntu Mono"
                         :height 130
@@ -20,7 +33,21 @@
                         :width 'normal) )
   )
 )
+<<<<<<< .merge_file_a14040
 ;; *******************************************************
+=======
+
+;;(set-face-attribute 'default nil
+;;                    :family "Consolas" :height 120)
+
+;;(set-face-attribute 'default nil
+;;                   :family "Ubuntu Mono"
+;;                    :height 130
+;;                    :weight 'normal
+;;                    :width 'normal)
+
+;; ************************************************
+>>>>>>> .merge_file_a19756
 
 ;; who am i
 (setq user-full-name "romanjoe")
