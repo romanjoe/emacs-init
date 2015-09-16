@@ -87,9 +87,11 @@
 (defconst demo-packages
   '(anzu
     company
+    ac-clang
     company-c-headers
     duplicate-thing
     ggtags
+    cmake-mode
     ;; Helm is incremental completion and selection
     ;; narrowing framework for Emacs
     helm
@@ -163,6 +165,9 @@
 ;; enable start elscreen package on start
 (elscreen-start)
 
+;; enable column editing
+(cua-mode)
+
 (require 'setup-helm)
 (require 'setup-helm-gtags)
 ;; (require 'setup-ggtags)
@@ -216,7 +221,7 @@
 ;; “java”: The default style for java-mode (see below)
 ;; “user”: When you want to define your own style
 (setq
- c-default-style "linux" ;; set style to "linux"
+ c-default-style "k&r" ;; set style to "linux"
  )
 
 (global-set-key (kbd "RET") 'newline-and-indent) ; automatically indent when press RET
@@ -258,6 +263,7 @@
 
 ;; Package: yasnippet
 (require 'yasnippet)
+(setq yas-snippet-dirs '("~/.emacs.d/elpa/yasnippet-20141223.303/snippets"))
 (yas-global-mode 1)
 
 (require 'gist)
