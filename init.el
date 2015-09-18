@@ -3,14 +3,14 @@
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
-; ================ MY MODIFICATIONS ======================
+                                        ; ================ MY MODIFICATIONS ======================
 ;; **************** PLATFORM DEPENDENT  *******************
 (cond
  ((string-equal system-type "windows-nt")
   (progn ;;Use 10-pt Consolas as default font in win system
-   (set-face-attribute 'default nil
-                       :family "Consolas" :height 120) )
- )
+    (set-face-attribute 'default nil
+                        :family "Consolas" :height 120) )
+  )
  ((string-equal system-type "gnu/linux")
   (progn ;; Use Ubuntu Mono as default font for linux system
     (set-face-attribute 'default nil
@@ -19,7 +19,7 @@
                         :weight 'normal
                         :width 'normal) )
   )
-)
+ )
 ;; who am i
 (setq user-full-name "romanjoe")
 (setq user-mail-address "mrromanjoe@gmail.com")
@@ -62,18 +62,13 @@
   (if (not indent-tabs-mode)
       (untabify (point-min) (point-max)))
   nil
-)
-;;(add-to-list 'write-file-functions 'format-current-buffer)
+  )
+;; (add-to-list 'write-file-functions 'format-current-buffer)
 (add-to-list 'write-file-functions 'untabify-current-buffer)
 (add-to-list 'write-file-functions 'delete-trailing-whitespace)
 
 ;; set custom themes folder and font
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;;(set-face-attribute 'default nil
-;;                   :family "Ubuntu Mono"
-;;                    :height 130
-;;                    :weight 'normal
-;;                    :width 'normal)
 
 ;; function for files with sudo rights
 (defun sudo-save ()
@@ -81,6 +76,16 @@
   (if (not buffer-file-name)
       (write-file (concat "/sudo:root@localhost:" (ido-read-file-name "File:")))
     (write-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
+;; always open files in read-only mode
+(add-hook 'find-file-hook
+          '(lambda ()
+             (when (and (buffer-file-name)
+                        (file-exists-p (buffer-file-name))
+                        (file-writable-p (buffer-file-name)))
+               (message "Toggle to read-only for existing file")
+               (toggle-read-only 1))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; =============== MY MODIFICATIONS END ===============================
 
@@ -310,7 +315,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; define desirable python version
-(defvar py-version "/usr/bin/python2")
+(defvar py-version "/usr/bin/python")
 ;; set python version to run from emacs
 (setq python-shell-interpreter py-version)
 ;; accociate files with python
@@ -373,10 +378,10 @@ May be necessary for some GUI environments (e.g., Mac OS X)")
     ;; Jedi
     (require 'jedi)
 
-    ;; (Many) config helpers follow
+    ;; ;; (Many) config helpers follow
 
-    ;; Alternative methods of finding the current project root
-    ;; Method 1: basic
+    ;; ;; Alternative methods of finding the current project root
+    ;; ;; Method 1: basic
     (defun get-project-root (buf repo-file &optional init-file)
       "Just uses the vc-find-root function to figure out the project root.
        Won't always work for some directory layouts."
