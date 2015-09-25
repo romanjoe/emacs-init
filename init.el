@@ -77,13 +77,19 @@
       (write-file (concat "/sudo:root@localhost:" (ido-read-file-name "File:")))
     (write-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
-;; always open files in read-only mode
+;; always open files in read-only mode and make read-only after saving file
 (add-hook 'find-file-hook
           '(lambda ()
              (when (and (buffer-file-name)
                         (file-exists-p (buffer-file-name))
                         (file-writable-p (buffer-file-name)))
-               (message "Toggle to read-only for existing file")
+               (toggle-read-only 1))))
+
+(add-hook 'after-save-hook
+          '(lambda ()
+             (when (and (buffer-file-name)
+                        (file-exists-p (buffer-file-name))
+                        (file-writable-p (buffer-file-name)))
                (toggle-read-only 1))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -92,11 +98,10 @@
 (defconst demo-packages
   '(anzu
     company
-    ac-clang
     company-c-headers
     duplicate-thing
     ggtags
-    cmake-mode
+    ;;cmake-font-lock
     ;; Helm is incremental completion and selection
     ;; narrowing framework for Emacs
     helm
@@ -117,8 +122,6 @@
     iedit
     ;; powerful snippet package for wide range of languages
     yasnippet
-    ;; quick interface to own  gists
-    gist
     ;; creates files tree in separate buffer
     sr-speedbar
     ;; intelligent parenthesis auto insertion
@@ -148,6 +151,10 @@
     py-autopep8
     ;; package for auto spell checking
     auto-dictionary
+    ;; allows to remove all buffers except active (C-x 1 bind)
+    zygospore
+    ;; simple refactoring framework
+    srefactor
     ))
 
 (defun install-packages ()
@@ -187,6 +194,11 @@
 (venv-initialize-eshell) ;; if you want eshell support
 (setq venv-location "/home/romanjoe/dev/python-envs/")
 
+;; enable srefactor key binding for c and c++ modes
+(require 'srefactor)
+(define-key c-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
+(define-key c++-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
+
 ;; enable spell checking with auto choosing dictionary
 ;; to download dictionary one need to type $> sudo pacman -S aspell-en - for english
 (require 'auto-dictionary)
@@ -208,7 +220,7 @@
 (define-key c-mode-map [(control tab)] 'company-complete)
 (define-key c++-mode-map [(control tab)] 'company-complete)
 
-;; company-c-headers
+;; company backends
 (add-to-list 'company-backends 'company-c-headers)
 
 ;; hs-minor-mode for folding source code
@@ -268,10 +280,9 @@
 
 ;; Package: yasnippet
 (require 'yasnippet)
-(setq yas-snippet-dirs '("~/.emacs.d/elpa/yasnippet-20141223.303/snippets"))
+(add-to-list 'yas-snippet-dirs "/home/romanjoe/.emacs.d/elpa/yasnippet-20141223.303/snippets/")
 (yas-global-mode 1)
 
-(require 'gist)
 ;; Package: smartparens
 (require 'smartparens-config)
 (setq sp-base-key-bindings 'paredit)
@@ -305,9 +316,6 @@
    (quote
     ("a43533a51fe3fe8b006e0320eb815ddbe2e75bc3d72fae18fc38c4558883dc22" "0eebf69ceadbbcdd747713f2f3f839fe0d4a45bd0d4d9f46145e40878fc9b098" default)))
  '(scroll-bar-mode nil)
- '(semantic-c-dependency-system-include-path
-   (quote
-    ("/home/romanjoe/dev/linux-cortexm-1.12.0/linux/drivers" "/home/romanjoe/dev/linux-cortexm-1.12.0/linux/arch" "/home/romanjoe/dev/linux-cortexm-1.12.0/linux/include" "/home/romanjoe/dev/linux-cortexm-1.12.0/linux/kernel" "/home/romanjoe/dev/stm32/stm32_discovery_arm_gcc/STM32F4-Discovery_FW_V1.1.0/Libraries/CMSIS/ST/STM32F4xx/Include" "/home/romanjoe/dev/stm32/stm32_discovery_arm_gcc/STM32F4-Discovery_FW_V1.1.0/Libraries/CMSIS/Include" "/home/romanjoe/dev/stm32/stm32_discovery_arm_gcc/STM32F4-Discovery_FW_V1.1.0/Libraries/STM32F4xx_StdPeriph_Driver/inc")))
  '(send-mail-function (quote smtpmail-send-it))
  '(tool-bar-mode nil))
 (custom-set-faces
