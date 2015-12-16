@@ -38,6 +38,9 @@
                                           newline-mark))
                             (whitespace-mode 1)))
 
+(define-key c-mode-map (kbd "C-c C-f") 'hs-toggle-hiding)
+(define-key c++-mode-map (kbd "C-c C-f") 'hs-toggle-hiding)
+
 ;; Package: volatile-highlights
 ;; GROUP: Editing -> Volatile Highlights
 (require 'volatile-highlights)
@@ -70,6 +73,21 @@
 (setq sp-autoskip-closing-pair 'always)
 (setq sp-hybrid-kill-entire-symbol nil)
 (sp-use-paredit-bindings)
+
+;;enables the ability to list recently opened files
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+
+;; when you press RET, the curly braces automatically
+;; add another newline
+(sp-with-modes '(c-mode c++-mode)
+  (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
+  (sp-local-pair "#if" " #endif" :post-handlers '(("||\n[i]" "RET")))
+  (sp-local-pair "#ifndef" " #define" :post-handlers '(("||\n[i]" "RET")))
+  (sp-local-pair "/*" "*/" :post-handlers '((" | " "SPC")
+                                            ("* ||\n[i]" "RET"))))
 
 (show-smartparens-global-mode +1)
 (smartparens-global-mode 1)
