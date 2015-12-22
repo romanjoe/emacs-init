@@ -14,7 +14,9 @@
  ((string-equal system-type "gnu/linux")
   (progn ;; Use Ubuntu Mono as default font for linux system
     (set-face-attribute 'default nil
-                        :family "Ubuntu Mono"
+                        ;; :family "Ubuntu Mono"
+                        ;; :family "Anonymus Pro"
+                        :family "Fixed"
                         :height 130
                         :weight 'normal
                         :width 'normal) )
@@ -154,7 +156,7 @@
     ;; allows to remove all buffers except active (C-x 1 bind)
     zygospore
     ;; simple refactoring framework
-    srefactor
+;;    srefactor
     ))
 
 (defun install-packages ()
@@ -180,6 +182,19 @@
 ;; enable column editing
 (cua-mode)
 
+;; builtin support for sysntax check, C/C++ files config
+;; to use it the following target must be added to Makefile
+;; check-syntax:
+;;     gcc -o /dev/null -S ${CHK_SOURCES}
+
+(require 'flymake)
+(setq flymake-allowed-file-name-masks
+      (cons '(".+\\.c$"
+              flymake-simple-make-init
+              flymake-simple-cleanup
+              flymake-get-real-file-name)
+            flymake-allowed-file-name-masks))
+
 (require 'setup-helm)
 (require 'setup-helm-gtags)
 ;; (require 'setup-ggtags)
@@ -195,9 +210,9 @@
 (setq venv-location "/home/romanjoe/dev/python-envs/")
 
 ;; enable srefactor key binding for c and c++ modes
-(require 'srefactor)
-(define-key c-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
-(define-key c++-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
+;;(require 'srefactor)
+;;(define-key c-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
+;;(define-key c++-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
 
 ;; enable spell checking with auto choosing dictionary
 ;; to download dictionary one need to type $> sudo pacman -S aspell-en - for english
